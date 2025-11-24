@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Project - Fundamentals of Computing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #d4af37;
+            --accent: #f5f5f5;
+            --text-primary: #2c2c2c;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #fff;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, #fff 0%, var(--secondary) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .course-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .mission-section {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-top: 3rem;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .mission-section h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        .mission-content {
+            min-height: 100px;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        /* Team Members - Paired Layout */
+        .team-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .team-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            position: relative;
+            background: #f5f5f5;
+        }
+
+        .team-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .team-card:hover .team-image img {
+            transform: scale(1.05);
+        }
+
+        .team-info {
+            padding: 2rem;
+        }
+
+        .team-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .team-role {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        .team-bio {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .team-bio p {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Video Gallery - Paired Layout */
+        .video-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+  .video-thumbnail {
+    width: 100%;
+    height: 350px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-thumbnail::before {
+    content: '🎬';
+    font-size: 5rem;
+    opacity: 0.2;
+    position: absolute;
+}
+
+.play-button {
+    width: 80px;
+    height: 80px;
+    background: var(--secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.video-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(212, 175, 55, 0.9);
+    color: var(--primary);
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.video-card:hover .play-button {
+    transform: scale(1.2);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+}
+
+.video-card:hover .video-overlay {
+    opacity: 1;
+    bottom: 30px;
+}
+
+.video-card:hover .video-thumbnail {
+    background: linear-gradient(135deg, #2d2d2d 0%, #3d3d3d 100%);
+}
+
+/* Make video card a clickable link */
+.video-card {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+}
+
+        /* Documentation */
+        .doc-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .doc-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            color: #fff;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+
+        .doc-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .doc-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            color: var(--secondary);
+        }
+
+        .doc-card p {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+
+        .visualizer-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, #c9a347 100%);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+        }
+
+        .visualizer-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212,175,55,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: #fff;
+            text-align: center;
+            padding: 3rem 5%;
+        }
+
+        footer p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .team-row,
+            .video-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="smooth-scroll">
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Group Project </div>
+            <ul class="nav-links">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#team">TEAM</a></li>
+                <li><a href="#videos">VIDEOS</a></li>
+                <li><a href="#docs">DOCUMENTATION</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Fundamentals of Computing</h1>
+            <p class="hero-subtitle">CMPS1134 - Final Project </p>
+            <div class="course-description">
+                <p> This course is an introduction to the fundamentals of Computer Science that will provide students with a fundation for future courses in Computer Science. This course is a board survey of the discipline, covering essential topics such as computer architecture, operating systems, and computer networks; software and software development; data organization.  </p>
+            </div>
+
+            <div class="mission-section">
+                <h2>Team Mission</h2>
+                <div class="mission-content">
+                    <p>Our team is dedicated to demonstrating the practical application of data structures through interactive visualization. This website serves as our final project portfolio, showcasing our understanding of Stack and Queue data structures and their real world implementations. </p>
+                </div>
+            </div>
+
+            <a href="visualizer.html" class="visualizer-link" target="_blank">
+                Launch Data Structure Visualizer →
+            </a>
+        </div>
+    </section>
+
+    <section id="team">
+        <h2 class="section-title">Meet Our Team</h2>
+        <!-- Row 1: Samta & Jamilah -->
+        <div class="team-row">
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="samta.jpg" alt="Samta Sandhu">
+                </div>
+                <div class="team-info">
+                    <h3>Samta Sandhu</h3>
+                    <p class="team-role">Team Member</p>
+                    <div class="team-bio">
+                        <p><strong>Program:</strong> Associates in Information Technology </p>
+                        <p><strong>IT Interests:</strong>  data science and AI/machine learning </p>
+                        <p><strong>Key Takeaway:</strong> Data Storage </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="jamilah.jpg" alt="Jamilah Usher">
+                </div>
+                <div class="team-info">
+                    <h3>Jamilah Usher</h3>
+                    <p class="team-role">Team Member</p>
+                    <div class="team-bio">
+                        <p><strong>Program:</strong> Associates in Information Technology </p>
+                        <p><strong>IT Interests:</strong> Graphic Designing, Python and artificial intelligence </p>
+                        <p><strong>Key Takeaway:</strong> Networking and the Internet </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2: Jabez & Albert -->
+        <div class="team-row">
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="jabez.jpg" alt="Jabez Jou">
+                </div>
+                <div class="team-info">
+                    <h3>Jabez Jou</h3>
+                    <p class="team-role">Team Member</p>
+                    <div class="team-bio">
+                        <p><strong>Program:</strong> Associates in Information Technology </p>
+                        <p><strong>IT Interests:</strong> Programming </p>
+                        <p><strong>Key Takeaway:</strong> Data Manipulation </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="team-image">
+                    <img src="albert.jpg" alt="Albert Gilharry">
+                </div>
+                <div class="team-info">
+                    <h3>Albert Gilharry</h3>
+                    <p class="team-role">Team Member</p>
+                    <div class="team-bio">
+                        <p><strong>Program:</strong> Associates in Information Technology </p>
+                        <p><strong>IT Interests:</strong> [Interests]</p>
+                        <p><strong>Key Takeaway:</strong> [Favorite topic from course]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ <section id="videos">
+    <h2 class="section-title">Video Gallery</h2>
+    <!-- Row 1: Samta & Jamilah Videos -->
+    <div class="video-row">
+        <a href="https://drive.google.com/file/d/1_9_agaQqjWNuV8F5C1KSoyReQhQYD49X/view?usp=share_link" class="video-card" target="_blank">
+            <div class="video-thumbnail">
+                <div class="play-button">▶</div>
+                <div class="video-overlay">Click to Watch</div>
+            </div>
+            <div class="video-info">
+                <h3>Samta Sandhu's Video</h3>
+                <p class="video-caption">Data Storage (Binary conversion)</p>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1kk3KOY-eFF7HNKz3CnFa-vW1t90aoyNr/view?usp=drivesdk" class="video-card" target="_blank">
+            <div class="video-thumbnail">
+                <div class="play-button">▶</div>
+                <div class="video-overlay">Click to Watch</div>
+            </div>
+            <div class="video-info">
+                <h3>Jamilah Usher's Video</h3>
+                <p class="video-caption">Networking and the Internet</p>
+            </div>
+        </a>
+    </div>
+
+    <!-- Row 2: Jabez & Albert Videos -->
+    <div class="video-row">
+        <a href="https://drive.google.com/file/d/1kZSo-5Png0VQfbLLeCd0XdC2-bkdTPp0/view?usp=drivesdk" class="video-card" target="_blank">
+            <div class="video-thumbnail">
+                <div class="play-button">▶</div>
+                <div class="video-overlay">Click to Watch</div>
+            </div>
+            <div class="video-info">
+                <h3>Jabez Jou's Video</h3>
+                <p class="video-caption">Data Manipulation</p>
+            </div>
+        </a>
+
+        <a href=" " class="video-card" target="_blank">
+            <div class="video-thumbnail">
+                <div class="play-button">▶</div>
+                <div class="video-overlay">Click to Watch</div>
+            </div>
+            <div class="video-info">
+                <h3>Albert Gilharry's Video</h3>
+                <p class="video-caption"></p>
+            </div>
+        </a>
+    </div>
+</section>
+
+   <section id="docs">
+    <h2 class="section-title">Documentation</h2>
+    <div class="doc-links">
+        <a href="https://docs.google.com/document/d/1PGl_P-3J7PD2B05GDXtFHnOvUzjzXJBRc3gX2lq88_8/edit?usp=sharing" class="doc-card" target="_blank">
+            <div class="doc-icon">📄</div>
+            <h3>Project Report</h3>
+            <p>Complete project documentation and analysis</p>
+        </a>
+
+        <a href="YOUR_POWERPOINT_GOOGLE_DRIVE_LINK" class="doc-card" target="_blank">
+            <div class="doc-icon">📊</div>
+            <h3>Presentation Slides</h3>
+            <p>PowerPoint presentation </p>
+        </a>
+
+        <a href="https://github.com/SamtaSandhu/computing-fundamentals-project.git" class="doc-card" target="_blank">
+            <div class="doc-icon">💻</div>
+            <h3>Code Repository</h3>
+            <p>GitHub repository with all source code</p>
+        </a>
+    </div>
+</section>
+
+    <footer>
+        <p>&copy; 2025 CMPS1134 Fundamentals of Computing. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
