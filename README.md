@@ -1,10 +1,7 @@
 # Fundamentals-Of-Computing-1
 # 📊 Data Structure Visualizer - CMPS1134 Final Project
 
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://yourusername.github.io/team2-foc-project/)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+ 
 
 > An interactive web-based educational tool that visualizes Stack (LIFO) and Queue (FIFO) data structures with real-time animations and operations.
 
@@ -23,16 +20,15 @@ This project is the final deliverable for **CMPS1134 - Fundamentals of Computing
 
 ## 🚀 Live Demo
 
-**Visit the live website:** [https://github.com/SamtaSandhu/Fundamentals-of-computng-semester-project-..git](https://github.com/SamtaSandhu/Fundamentals-of-computng-semester-project-..git)
-
+**Visit the live website:**  https://samtasandhu.github.io/Fundamentals-Of-Computing-1/ 
 ## 👥 Team Members
 
-| Name | Role | Contribution |
-|------|------|--------------|
-| **Samta Sandhu** | Developer | Portfolio website structure, CSS design, team coordination |
-| **Jabez Jou** | Developer | Stack implementation, JavaScript logic, animations |
-| **Albert Gilharry** | Developer | Queue implementation, JavaScript architecture, styling |
-| **Jamilah Usher** | Developer | Documentation, testing, deployment, video integration |
+| Name 
+|------|
+| **Samta Sandhu**  |
+| **Jabez Jou** |
+| **Albert Gilharry**| 
+| **Jamilah Usher** |  
 
 ## 🛠️ Technologies Used
 
@@ -51,7 +47,6 @@ team2-foc-project/
 ├── README.md              # This file
 ├── samta.jpg              # Team member photo
 ├── jabez.jpg              # Team member photo
-├── albert.jpg             # Team member photo
 └── jamilah.jpg            # Team member photo
 ```
 
