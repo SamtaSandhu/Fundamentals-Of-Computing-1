@@ -82,57 +82,8 @@ This visualizer helps students understand:
 - A modern web browser (Chrome, Firefox, Safari, or Edge)
 - Text editor (VS Code recommended)
 - Git installed on your system
-
-### Installation Steps
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/SamtaSandhu/Fundamentals-of-computng-semester-project-..git
-```
-
-2. **Navigate to the project directory**
-```bash
-cd team2-foc-project
-```
-
-3. **Open in your browser**
-```bash
-# On macOS
-open index.html
-
-# On Windows
-start index.html
-
-# On Linux
-xdg-open index.html
-```
-
-### Using Live Server (Recommended)
-
-1. Install [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VS Code extension
-2. Right-click on `index.html`
-3. Select "Open with Live Server"
-4. Website opens at `http://localhost:5500`
-
-## 🚀 Deployment
-
-This project is deployed using **GitHub Pages**. To deploy your own version:
-
-1. **Push code to GitHub**
-```bash
-git add .
-git commit -m "Initial commit"
-git push origin main
-```
-
-2. **Enable GitHub Pages**
-   - Go to repository Settings
-   - Navigate to Pages section
-   - Select branch: `main`
-   - Select folder: `/ (root)`
-   - Click Save
-
-3. **Access your site**
+  
+ **Access your site**
    - URL:  https://samtasandhu.github.io/Fundamentals-Of-Computing-1/ 
 
 
@@ -157,8 +108,6 @@ Through this project, our team gained experience in:
 ✅ **Documentation**: Technical writing and README creation  
 
 ## 🐛 Known Issues
-
-- Queue dequeue uses `shift()` which has O(n) complexity (acceptable for educational purposes)
 - Mobile landscape mode may require horizontal scrolling for queue visualization
 - Browser storage not implemented (data clears on page refresh)
 
