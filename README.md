@@ -133,42 +133,8 @@ git push origin main
    - Click Save
 
 3. **Access your site**
-   - URL: `https://github.com/SamtaSandhu/Fundamentals-of-computng-semester-project-..git`
-   - Wait 2-5 minutes for deployment
+   - URL:  https://samtasandhu.github.io/Fundamentals-Of-Computing-1/ 
 
-## 📚 Code Documentation
-
-### Stack Implementation
-
-```javascript
-// Push operation - O(1) time complexity
-function pushToStack(value) {
-    stack.push(value);  // Add to end of array (top of stack)
-    updateVisualization();
-}
-
-// Pop operation - O(1) time complexity
-function popFromStack() {
-    stack.pop();  // Remove from end of array (top of stack)
-    updateVisualization();
-}
-```
-
-### Queue Implementation
-
-```javascript
-// Enqueue operation - O(1) time complexity
-function enqueueToQueue(value) {
-    queue.push(value);  // Add to rear of queue
-    updateVisualization();
-}
-
-// Dequeue operation - O(n) time complexity (for educational purposes)
-function dequeueFromQueue() {
-    queue.shift();  // Remove from front of queue
-    updateVisualization();
-}
-```
 
 ## 🎨 Design Features
 
@@ -228,18 +194,14 @@ For questions or feedback about this project:
 
 ## 🔗 Links
 
-- **Live Website**: [https://github.com/SamtaSandhu/Fundamentals-of-computng-semester-project-..git](https://github.com/SamtaSandhu/Fundamentals-of-computng-semester-project-..git)
-- **Project Report**: [Google Drive Link]
-- **Presentation Slides**: [Google Drive Link]
+- **Live Website**: https://samtasandhu.github.io/Fundamentals-Of-Computing-1/
+- **Project Report**:  Available on the website
+- **Presentation Slides**: Available on the website
 - **Video Demonstrations**: Available on the website
 
 ---
 
-### 📊 Project Statistics
-
-![Lines of Code](https://img.shields.io/badge/Lines%20of%20Code-2000+-blue)
-![Files](https://img.shields.io/badge/Files-6-green)
-![Last Commit](https://img.shields.io/github/last-commit/SamtaSandhu/team2-foc-project)
+ 
 
 ### ⭐ Star This Repository
 
